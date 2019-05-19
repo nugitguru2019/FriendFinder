@@ -11,13 +11,20 @@ Table of Contents
   Future Plans
 
 Dependencies
+
 FriendFinder was built with just a trio of common dependencies:
 
+  
   Axios (to handle GET and POST requests on the front end)
+  
   Express (to handle request routing on the back end)
+  
   Path (to more easily work with file and directory paths on the back end)
+
+
 How It Works
 A user navigates to the site and clicks through to the survey. If they fill out the survey correctly, with all required inputs populated, then a POST request is made to the path /api/friends, adding the user to the FriendFinder API as a JSON object built like so:
+
 
 {
     name: `Timothy Barlin`,
@@ -25,11 +32,13 @@ A user navigates to the site and clicks through to the survey. If they fill out 
     dreamDestination: `Barbados`,
     answers: [3, 4, 3, 2, 1, 5, 4, 4, 5, 2]
 }
+
 Within the response function of the POST request, a second function is called that sends a GET request to api/friends/bff. The handling of this GET request on the back end is probably the most complex part of the entire app.
 
 Essentially, what happens when the server receives a GET request to the api/friends/bff path is that it loops through each previously included user in the FriendFinder API, and within each loop, it runs a nested loop through each user's survey scores, comparing their scores with those of the most recently included user (the person who just posted their survey info).
 
 The whole process looks like this:
+
 
 let bestFriends = [];
 let bestFriendDiff = 40;
@@ -64,11 +73,13 @@ for (i = 0; i < friends.length - 1; i++) {
 }
 
 res.json(bestFriends);
+
 The ideal match is found by tallying the total difference between the scores of each user and the scores of the most recent user, and the lowest difference between scores is the ideal match. If more than one previous user is tied for the lowest difference with the most recent user, then all previous users with tying lowest scores are returned in the GET response, which is returned as an array of JSON objects.
 
 The information returned in the GET response is then used to populate a modal that pops up on the page, highlighting the users matched with the current user.
 
 Future Plans
+
 1. Image uploading and better image validation
 At the moment, images are validated on the front end with a check for a valid file extension at the end of the link that each user submits. (I.e., the code checks for ".jpg," ".png," ".gif," and ".tiff") This isn't the best UX approach and can easily be fooled. (A user merely has to type ".jpg" or something similar at the end of the string they submit for photo URL, even if the string isn't an actual URL link to a photo.)
 
