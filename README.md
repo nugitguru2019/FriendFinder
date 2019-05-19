@@ -1,10 +1,13 @@
 FriendFinder
+
 FriendFinder is a full-stack app built for finding your ideal travel companion. Users are invited to take a short ten-question survey, and their scores are compared with the scores of every other user in the Wanderer database to find an ideal match (or matches, if two or more other users are evenly compared). Each match is then displayed for the user, with the match's picture, name, and their dream destination.
 
 Table of Contents
+  
   Dependencies
   How It Works
   Future Plans
+
 Dependencies
 FriendFinder was built with just a trio of common dependencies:
 
