@@ -5,7 +5,9 @@ FriendFinder is a full-stack app built for finding your ideal travel companion. 
 Table of Contents
   
   Dependencies
+  
   How It Works
+  
   Future Plans
 
 Dependencies
