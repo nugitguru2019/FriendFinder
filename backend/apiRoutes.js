@@ -9,7 +9,7 @@ function apiRoutes(app) {
         console.log(userData)
         let bestFriends = [];
 
-        let bestFriendDiff = 40;
+        let bestFriendDiff = 11;
 
         for (let i = 0; i < friends.length - 1; i++) {
 
@@ -28,31 +28,19 @@ function apiRoutes(app) {
 
             }
 
-
-            if (bestFriends === []) {
-
-                if (friendDiff < bestFriendDiff) {
-
-                    bestFriendDiff = friendDiff;
-
-                    bestFriends.push(friends[i]);
-                    break;
-
-                }
-
-            } else {
-
+            
+            if (bestFriends.length === 0) {
+                console.log(friendDiff)
                 if (friendDiff <= bestFriendDiff) {
-
+                    console.log("hello")
                     bestFriends = [];
-
+    
                     bestFriendDiff = friendDiff;
-
+    
                     bestFriends.push(friends[i]);
                     break;
-
+    
                 }
-
             }
 
         }

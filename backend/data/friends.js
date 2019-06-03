@@ -9,7 +9,7 @@ const friends = [
 
         dreamDestination: `Holland`,
 
-        answers: [3, 4, 3, 2, 1, 5, 4, 4, 5, 2]
+        answers: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
 
     },
 
