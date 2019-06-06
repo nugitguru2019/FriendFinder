@@ -40,42 +40,6 @@ Within the response function of the POST request, a second function is called th
 
 Essentially, what happens when the server receives a GET request to the api/friends/bff path is that it loops through each previously included user in the FriendFinder API, and within each loop, it runs a nested loop through each user's survey scores, comparing their scores with those of the most recently included user (the person who just posted their survey info).
 
-The whole process looks like this:
-
-
-let bestFriends = [];
-let bestFriendDiff = 40;
-
-const newFriend = friends[friends.length - 1];
-
-for (i = 0; i < friends.length - 1; i++) {
-    let friendDiff = 0;
-
-    for (j = 0; j < friends[i].answers.length; j++) {
-        if (friends[i].answers[j] > newFriend.answers[j]) {
-            friendDiff += friends[i].answers[j] - newFriend.answers[j];
-        } else if (friends[i].answers[j] < newFriend.answers[j]) {
-            friendDiff += newFriend.answers[j] - friends[i].answers[j];
-        }
-    }
-
-    if (bestFriends === []) {
-        if (friendDiff < bestFriendDiff) {
-            bestFriendDiff = friendDiff;
-            bestFriends.push(friends[i]);
-        }
-    } else {
-        if (friendDiff < bestFriendDiff) {
-            bestFriends = [];
-            bestFriendDiff = friendDiff;
-            bestFriends.push(friends[i]);
-        } else if (friendDiff === bestFriendDiff) {
-            bestFriends.push(friends[i]);
-        }
-    }
-}
-
-res.json(bestFriends);
 
 The ideal match is found by tallying the total difference between the scores of each user and the scores of the most recent user, and the lowest difference between scores is the ideal match. If more than one previous user is tied for the lowest difference with the most recent user, then all previous users with tying lowest scores are returned in the GET response, which is returned as an array of JSON objects.
 
@@ -84,10 +48,7 @@ The information returned in the GET response is then used to populate a modal th
 Future Plans:
 
 1. Image uploading and better image validation
-At the moment, images are validated on the front end with a check for a valid file extension at the end of the link that each user submits. (I.e., the code checks for ".jpg," ".png," ".gif," and ".tiff") This isn't the best UX approach.(A user merely has to type ".jpg" or something similar at the end of the string they submit for photo URL, even if the string isn't an actual URL link to a photo.)
-
-In the future, the URL input will be replaced with an input to upload a photo directly from the user.
 
 2. Profile pages with saved matches
-Right now, once users fill out the survey and get entered into the FriendFinder API, they are shown their closest matches once. In the future, it would be helpful to provide a profile page for each user, where they can track new matches as more people take the survey and add new information to the database.
+
 
